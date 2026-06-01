@@ -28,9 +28,42 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 3px;
-      margin-bottom: 80px;
+      margin-bottom: 32px;
       color: #111;
     }
+
+    .tabs {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 60px;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .tab {
+      background: none;
+      border: none;
+      padding: 12px 0;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #999;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: color 0.15s ease;
+    }
+
+    .tab:hover { color: #555; }
+
+    .tab.active {
+      color: #111;
+      border-bottom-color: #111;
+    }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
 
     .principle {
       padding: 32px 0;
@@ -115,8 +148,11 @@
       header h1 {
         font-size: 36px;
         letter-spacing: 2px;
-        margin-bottom: 48px;
+        margin-bottom: 24px;
       }
+
+      .tabs { gap: 24px; margin-bottom: 40px; }
+      .tab { font-size: 11px; }
 
       .principle {
         padding: 24px 0;
@@ -145,6 +181,13 @@
     <header>
       <h1>Principles</h1>
     </header>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="principles">Principles</button>
+      <button class="tab" data-tab="mindset">Mindset</button>
+    </nav>
+
+    <section id="principles" class="tab-panel active">
     <div class="principle">
       <span class="num">01</span>
       <h2>I AM OPTIMISTIC</h2>
@@ -259,10 +302,41 @@
         <li>Demand the highest standard. Double-check, refine, and ask — could this be better? Would someone I respect find this useful, even impressive?</li>
       </ul>
     </div>
+    </section>
+
+    <section id="mindset" class="tab-panel">
+      <div class="principle">
+        <span class="num">01</span>
+        <h2>EVERYTHING IS POSSIBLE</h2>
+        <p>It is just a matter of time and effort.</p>
+      </div>
+
+      <div class="principle">
+        <span class="num">02</span>
+        <h2>I STEP UP WHEN THINGS GET HARDER</h2>
+        <p>The harder it gets, the more I lean in.</p>
+      </div>
+
+      <div class="principle">
+        <span class="num">03</span>
+        <h2>RISKS AND THRILLS ARE NECESSARY</h2>
+        <p>They are non-negotiable for my own happiness.</p>
+      </div>
+    </section>
 
     <footer>
       <p>Be Bold, Start Cold.</p>
     </footer>
   </div>
+
+  <script>
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.tab;
+        document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t === tab));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === target));
+      });
+    });
+  </script>
 </body>
 </html>
